@@ -23,16 +23,29 @@ import com.bezkoder.spring.jpa.h2.repository.TutorialRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+/**
+ * Controller for managing tutorials.
+ * <p>
+ * This class provides RESTful web services to create, retrieve, update, and delete tutorials.
+ * It interacts with the TutorialRepository to perform these operations.
+ * </p>
+ */
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
 public class TutorialController {
+
   private static final Logger logger = LoggerFactory.getLogger(TutorialController.class);
 
   @Autowired
   TutorialRepository tutorialRepository;
-
+  /**
+   * Get all tutorials or search by title.
+   *
+   * @param title Optional search string to filter tutorials by title.
+   *              If this parameter is null, all tutorials are retrieved.
+   * @return ResponseEntity containing the list of tutorials and the HTTP status.
+   */
   @GetMapping("/tutorials")
   public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
     logger.info("Fetching all tutorials, title filter: {}", title);
@@ -55,7 +68,12 @@ public class TutorialController {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
+  /**
+   * Get a tutorial by its ID.
+   *
+   * @param id The ID of the tutorial.
+   * @return ResponseEntity containing the tutorial and the HTTP status.
+   */
   @GetMapping("/tutorials/{id}")
   public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
     Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
@@ -69,6 +87,12 @@ public class TutorialController {
     }
   }
 
+  /**
+   * Create a new tutorial.
+   *
+   * @param tutorial The tutorial to be created.
+   * @return ResponseEntity containing the created tutorial and the HTTP status.
+   */
   @PostMapping("/tutorials")
   public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
     try {
@@ -84,7 +108,14 @@ public class TutorialController {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
+  /**
+   * Update a tutorial.
+   *
+   * @param id The ID of the tutorial to be updated.
+   * @param tutorial The tutorial data to be updated.
+   * @return ResponseEntity containing the updated tutorial and the HTTP status.
+   *         Returns HttpStatus.NOT_FOUND if the tutorial is not found.
+   */
   @PutMapping("/tutorials/{id}")
   public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) {
     Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
@@ -100,6 +131,12 @@ public class TutorialController {
     }
   }
 
+  /**
+   * Delete a tutorial by its ID.
+   *
+   * @param id The ID of the tutorial to be deleted.
+   * @return ResponseEntity with HTTP status indicating the result of the operation.
+   */
   @DeleteMapping("/tutorials/{id}")
   public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
     try {
@@ -110,6 +147,11 @@ public class TutorialController {
     }
   }
 
+  /**
+   * Delete all tutorials.
+   *
+   * @return ResponseEntity with HTTP status indicating the result of the operation.
+   */
   @DeleteMapping("/tutorials")
   public ResponseEntity<HttpStatus> deleteAllTutorials() {
     try {
@@ -125,6 +167,11 @@ public class TutorialController {
 
   }
 
+  /**
+   * Find all published tutorials.
+   *
+   * @return ResponseEntity containing the list of published tutorials and the HTTP status.
+   */
   @GetMapping("/tutorials/published")
   public ResponseEntity<List<Tutorial>> findByPublished() {
     try {
