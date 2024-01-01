@@ -9,7 +9,7 @@ This documentation provides a comprehensive guide to the Spring Boot H2 CRUD App
 ### Installation
 
 **Prerequisites:**
-- Java JDK 11 or later
+- Java JDK 17 or later
 - Maven 3.6 or later
 
 **Steps:**
@@ -57,7 +57,7 @@ POST /api/item
 ## Tutorials
 
 **Creating Your First Record:**
-1. Navigate to `http://localhost:8080/item/new`.
+1. Navigate to `http://localhost:8081/item/new`.
 2. Fill in the details and submit.
 
 ## Troubleshooting
@@ -79,12 +79,12 @@ A: Yes, modify the `application.properties` file to connect to a different datab
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under BSD license.
 
 ## Contact
 
-For support or further questions, contact us at [support email].
+For support or further questions, contact us at [elioskaram@gmail.com].
 
 ## Changelog
 
-**v1.0.0** - Initial release with basic CRUD functionality.
+**v1.1.0** - Initial release with basic CRUD functionality.
