@@ -7,19 +7,20 @@ Tutorial Website is an interactive platform designed to create, update, view, an
 To get started with the Tutorial Website, follow these simple steps:
 
 1. Clone the repository to your local machine:
+```bash
 git clone [https://github.com/elioskaram/spring-boot-h2-database-crud-master.git]
+```
 
-
-2. Navigate to the project directory:
-
-
-3. Install dependencies (if applicable).
-
+3. Navigate to the project directory
+   
 ## Usage
 After installation, you can run the project using Maven:
+```bash
+mvn spring-boot:run
+```
 
-
-This command will start the Spring Boot application, and you can access the website at `http://localhost:[port]/`.
+This command will start the Spring Boot application, and you can access the website at `http://localhost:[8081]/`.
+but you should run the front end as well to be able to visualize the website.
 
 ## Contributing
 We welcome contributions to the Tutorial Website! If you have suggestions or improvements, feel free to contribute. Please contact any of our main contributors for guidance:
