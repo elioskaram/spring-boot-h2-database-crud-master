@@ -11,7 +11,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+      with: 
+        fetch-depth: 0
+        
+    - name: Install git-chglog
+      run: |
+        wget https://github.com/git-chglog/git-chglog/releases/download/v0.15.4/git-chglog_0.15.4_linux_amd64.tar.gz
+        tar -xzf git-chglog_0.15.4_linux_amd64.tar.gz
+        chmod +x git-chglog
+        sudo mv git-chglog /usr/local/bin/
+        
     - name: Set up JDK 19
       uses: actions/setup-java@v2
       with:
@@ -28,6 +37,10 @@ jobs:
     #step to debug and make sure that the .target is created with the jar file
     - name: List contents of the target directory
       run: ls -l ./target
+
+    #added for changeLog
+    - name: Generate Changelog
+      run: git-chglog --output CHANGELOG.md ${GITHUB_REF#refs/tags/}
 
 
     # This step will only execute if the build and test steps are successful
@@ -51,4 +64,7 @@ jobs:
         asset_path: ./target/spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar
         asset_name: spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar
         asset_content_type: application/java-archive
+
+
+    
 
