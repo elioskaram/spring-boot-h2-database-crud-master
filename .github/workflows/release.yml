@@ -16,6 +16,8 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '19'
+        distribution: 'temurin' # Adding the correct distribution here
+
 
     #  steps to build project and run tests here
     - name: Build and Test
